@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAK.com - team 93B</title>
+    <link rel="icon" href="https://github.com/akmal93b-dell/AAK.com/blob/main/favicon.png?raw=true" type="image/png">
+
+    <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 2vw;
+        }
+
+        body.dark-mode {
+            background-color: #2f2f2f;
+            color: #e0e0e0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        /* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25vw;
+    background-color: #24292f;
+    padding: 2vw;
+    height: 100vh;
+    color: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures text and image are on opposite sides */
+    margin-bottom: 3vh;
+}
+
+.sidebar-icon {
+    width: 4vw; /* Adjust size as needed */
+    height: 4vw; /* Adjust size as needed */
+    border-radius: 50%; /* Makes the image round */
+    cursor: pointer;
+}
+
+.aak-text {
+    font-size: 2.5vw;
+    font-weight: bold;
+}
+
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 2vh;
+            color: #fff;
+            font-size: 2.5vw;
+        }
+
+        .mode-toggle {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 1vw;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 2vh;
+            font-size: 2vw;
+        }
+
+        .mode-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        /* Navigation Links */
+        .nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav li {
+            padding: 1vw;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            font-size: 1.5vw;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #333;
+        }
+
+        .nav a.active {
+            background-color: #007bff;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 2vw;
+            overflow-y: auto;
+            margin-left: 26vw; /* Increased margin for better spacing */
+            font-size: 1.5vw;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        section h2 {
+            color: #007bff;
+            font-size: 2.5vw;
+            margin-bottom: 2vh;
+        }
+
+        /* Form Styling */
+        form input,
+        form textarea,
+        form button {
+            width: 90%;
+            padding: 1.5vw;
+            margin: 1.5vh 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 2vw;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+        }
+
+        /* Typing Animation */
+        .typing-text {
+            font-size: 1.8vw;
+            color: #007bff;
+            font-weight: bold;
+            display: inline;
+            border-right: 3px solid #007bff;
+            padding-right: 0.1em;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Link Colors for Dark Mode */
+        body.dark-mode a {
+            color: white;
+        }
+
+        .our-apps a {
+            text-decoration: none;
+            color: #007bff;
+            background-color: #fff;
+            padding: 1vw;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .our-apps a:hover {
+            text-decoration: underline;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        body.dark-mode .our-apps a {
+            color: white;
+            background-color: #444;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 1.2vw;
+            font-size: 1.8vw;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+        }
+
+        /* Support Section Button */
+        .support-button {
+            padding: 1.5vw;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .support-button:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="https://github.com/akmal93b-dell/AAK.com/blob/main/favicon.png?raw=true" target="_blank">
+                <img src="https://github.com/akmal93b-dell/AAK.com/blob/main/favicon.png?raw=true" alt="AAK Icon" class="sidebar-icon">
+            </a>            
+            <h2>AAK.com</h2>
+            <button class="mode-toggle" id="modeToggle">Switch to Dark Mode</button>
+            <ul class="nav">
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('simple')">Simple Codes</a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('about')">About</a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('form')">Submit Code</a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('feedback')">Feedback</a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('ourApps')">Our Apps</a></li>
+                <li><a href="javascript:void(0);" class="nav-link" onclick="showSection('support')">Support</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <section id="simple" class="section active">
+                <h2>coming soon...</h2>
+                <p>codes will come soon...</p>
+            </section>
+
+            <section id="about" class="section">
+                <h2>About AAK.com</h2>
+                <p>Welcome to AAK.com, a platform designed and created by Team 93B, a group of passionate teenage coders.
+
+We’re Akmal, Avishker, and Kavilash, and our mission is to provide an educational space where coders of all levels can come together to learn, share, and grow in their coding journeys.
+
+At AAK.com, we believe in the power of collaboration and open-source sharing. The website features a variety of simple code examples, designed to help beginners start coding and understand key concepts in app development.
+
+Whether you're a complete beginner or someone looking to improve your skills, our platform offers you the resources and tools you need to learn.
+
+Our Simple Code Section showcases easy-to-understand HTML, CSS, and JavaScript examples. You can explore these codes, learn how they work, and even try them out in your own projects.
+
+If you're interested in contributing, we also have a Submit Code section, where you can share your own creations with the community.
+
+We believe in giving back, which is why we have a Feedback section where users can directly communicate with us and share ideas for improving the site.
+
+Whether it’s adding new features or improving existing ones, your feedback is essential for making AAK.com better.
+
+AAK.com is more than just a website—it’s a place for learning, creating, and connecting. We’re constantly updating the site with new code examples and features, so be sure to visit often.
+
+We hope you enjoy exploring our site and that it serves as a valuable resource in your coding journey!,And our WEB is still on progress!</p>
+            </section>
+
+            <section id="form" class="section">
+                <h2>Submit Your Code</h2>
+                <form action="https://formspree.io/f/xnnnlpaa" method="POST" onsubmit="this.reset()">
+                    <textarea name="code" rows="10" placeholder="Paste your code here..." required></textarea>
+                    <input type="email" name="email" placeholder="Your email (optional)">
+                    <button type="submit">Submit Code</button>
+                </form>
+            </section>
+
+            <section id="feedback" class="section">
+                <h2>Feedback</h2>
+                <form 
+        action="https://formspree.io/f/xzzzyajl" 
+        method="POST" 
+        onsubmit="setTimeout(() => { this.reset(); }, 10);"
+    >
+        <input type="text" id="name" name="name" placeholder="Your Real name" required>
+        <input type="email" id="email" name="email" placeholder="Your Main email" required>
+        <textarea id="feedback" name="feedback" placeholder="Your valuable feedback" required></textarea>
+
+        <button type="submit">Send Feedback</button>
+    </form>
+            </section>
+
+            <section id="ourApps" class="section our-apps">
+                <h2>Our Apps</h2>
+                <div>
+                    <h3>Recipe Master</h3>
+                    <p>Explore and manage your favorite recipes with Recipe Master, a simple web-based recipe application.</p>
+                    <p><strong>Run for PC:</strong> <a href="https://akmal93b-dell.github.io/aak-our_apps-the_recipe_master.com/" target="_blank">Click Here</a></p>
+                    <p><strong>Download App for Android:</strong> <a href="https://drive.google.com/file/d/1AeZgLJA0WilHwHWnD_rjC5EQOOjMObqp/view?usp=sharing" target="_blank">Click Here</a></p>
+                </div>
+            </section>
+
+            <section id="support" class="section">
+                <h2>Support Us</h2>
+                <p>Stay connected with us and show your support by following us on social media:</p>
+                <div>
+                    <h3>YouTube</h3>
+                    <a href="https://www.youtube.com/@realakmal93b" target="_blank">Subscribe</a>
+                </div>
+                <div>
+                    <h3>Twitter</h3>
+                    <a href="https://x.com/realakmal93b" target="_blank">Follow</a>
+                </div>
+                <div>
+                    <h3>Facebook</h3>
+                    <a href="https://web.facebook.com/profile.php?id=61570397442623" target="_blank">Follow</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Mode Toggle Function
+        const modeToggle = document.getElementById('modeToggle');
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                modeToggle.textContent = 'Switch to Light Mode';
+            } else {
+                modeToggle.textContent = 'Switch to Dark Mode';
+            }
+        });
+
+        // Show Section Function
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+            activeSection.style.opacity = '0';
+            setTimeout(() => {
+                activeSection.style.opacity = '1';
+            }, 50);
+        }
+
+        // Clear Textarea After Submit
+        function clearTextarea() {
+            document.querySelector('textarea').value = '';
+        }
+    </script>
+</body>
+</html>
