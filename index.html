@@ -306,7 +306,7 @@ We hope you enjoy exploring our site and that it serves as a valuable resource i
 
             <section id="form" class="section">
                 <h2>Submit Your Code</h2>
-                <form action="https://formspree.io/f/xnnnlpaa" method="POST" onsubmit="this.reset()">
+                <form action="https://formspree.io/f/xnnnlpaa" method="POST" onsubmit="setTimeout(() => { this.reset(); }, 10);">
                     <textarea name="code" rows="10" placeholder="Paste your code here..." required></textarea>
                     <input type="email" name="email" placeholder="Your email (optional)">
                     <button type="submit">Submit Code</button>
