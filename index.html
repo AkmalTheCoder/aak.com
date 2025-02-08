@@ -182,7 +182,7 @@
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite;
+            animation: typing 3s steps(40) 2s forwards, blink 1s step-end infinite;
         }
 
         @keyframes typing {
@@ -267,6 +267,59 @@
             border: 1px solid #ccc;
             margin-top: 10px;
         }
+.code-card {
+    border: 2px solid #ccc;
+    padding: 2vw;
+    margin-bottom: 3vh;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.code-card h3 {
+    color: #007bff;
+    font-size: 2vw; /* Slightly smaller font */
+    margin-bottom: 1.5vh;
+}
+
+.code-card p {
+    font-size: 1.5vw; /* Slightly smaller font */
+    margin-bottom: 1vh;
+}
+
+.code-card pre {
+    background-color: #f4f4f4;
+    padding: 2vw;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 1.5vw; /* Slightly smaller font */
+    margin-top: 1.5vh;
+}
+
+button {
+    padding: 1vw;
+    font-size: 1.5vw;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.5vh;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.copy-btn {
+    background-color: #28a745;
+}
+
+.run-btn {
+    background-color: #007bff;
+}
+
+
 
     </style>
 </head>
@@ -295,6 +348,42 @@
             <section id="simple" class="section active">
                 <h2>coming soon...</h2>
                 <p>codes will come soon...</p>
+<div class="code-card">
+    <h3>Topic Code</h3>
+    <p>Description of the code goes here...</p>
+    <p>Made by: Your Name</p>
+    <pre><code id="codeBlock">
+       &lt;section class="calculator"&gt;
+    &lt;h2&gt;Calculator&lt;/h2&gt;
+    &lt;input type="text" id="result" disabled&gt;
+    &lt;div class="buttons"&gt;
+        &lt;button onclick="appendNumber(7)"&gt;7&lt;/button&gt;
+        &lt;button onclick="appendNumber(8)"&gt;8&lt;/button&gt;
+        &lt;button onclick="appendNumber(9)"&gt;9&lt;/button&gt;
+        &lt;button onclick="appendOperator('+')"&gt;+&lt;/button&gt;
+
+        &lt;button onclick="appendNumber(4)"&gt;4&lt;/button&gt;
+        &lt;button onclick="appendNumber(5)"&gt;5&lt;/button&gt;
+        &lt;button onclick="appendNumber(6)"&gt;6&lt;/button&gt;
+        &lt;button onclick="appendOperator('-')"&gt;-&lt;/button&gt;
+
+        &lt;button onclick="appendNumber(1)"&gt;1&lt;/button&gt;
+        &lt;button onclick="appendNumber(2)"&gt;2&lt;/button&gt;
+        &lt;button onclick="appendNumber(3)"&gt;3&lt;/button&gt;
+        &lt;button onclick="appendOperator('*')"&gt;*&lt;/button&gt;
+
+        &lt;button onclick="appendNumber(0)"&gt;0&lt;/button&gt;
+        &lt;button onclick="clearResult()"&gt;C&lt;/button&gt;
+        &lt;button onclick="calculate()"&gt;=&lt;/button&gt;
+        &lt;button onclick="appendOperator('/')"&gt;/&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+    </code></pre>
+    <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+    <button class="run-btn" onclick="runCode()">Run Code</button>
+</div>
+
+
             </section>
 
             <section id="about" class="section">
@@ -413,6 +502,29 @@ function runHTML() {
     newTab.document.write(code);
     newTab.document.close();
 }
+
+// Function to copy code to clipboard
+function copyCode() {
+    const code = document.getElementById('codeBlock');
+    const range = document.createRange();
+    range.selectNode(code);
+    window.getSelection().removeAllRanges();  // Clear current selection
+    window.getSelection().addRange(range);    // Select the code
+    document.execCommand('copy');             // Copy to clipboard
+    window.getSelection().removeAllRanges();  // Deselect text immediately after copying
+    alert('Code copied to clipboard!');
+}
+
+// Function to run the code in a new tab
+function runCode() {
+    const code = document.getElementById('codeBlock').innerText;
+    const newTab = window.open();
+    newTab.document.open();
+    newTab.document.write(code);
+    newTab.document.close();
+}
+
+
   </script>
 </body>
 </html>
